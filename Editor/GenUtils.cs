@@ -16,37 +16,9 @@ namespace Luban.Editor
         /// 生成执行
         /// </summary>
         /// <param name="arguments">参数</param>
-        /// <param name="before">前置执行器</param>
-        /// <param name="after">后置执行器</param>
-        public static void Gen(string arguments, string before, string after)
+        public static void Gen(string arguments)
         {
             Debug.Log(arguments);
-
-            IBeforeGen beforeGen = null;
-
-            if (!string.IsNullOrEmpty(before))
-            {
-                var type = Type.GetType(before);
-
-                if (type != null)
-                {
-                    beforeGen = Activator.CreateInstance(type) as IBeforeGen;
-                }
-            }
-
-            IAfterGen afterGen = null;
-
-            if (!string.IsNullOrEmpty(after))
-            {
-                var type = Type.GetType(after);
-
-                if (type != null)
-                {
-                    afterGen = Activator.CreateInstance(type) as IAfterGen;
-                }
-            }
-
-            beforeGen?.Process();
 
             var process = _Run(
                 _DOTNET,
@@ -65,8 +37,6 @@ namespace Luban.Editor
             }
 
             #endregion
-
-            afterGen?.Process();
 
             AssetDatabase.Refresh();
         }

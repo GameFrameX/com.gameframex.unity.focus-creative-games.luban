@@ -19,97 +19,32 @@ namespace Luban.Editor
     [CreateAssetMenu(fileName = "Luban", menuName = "Luban/ExportConfig")]
     public class LubanExportConfig : ScriptableObject
     {
-        #region 生命周期
-
-        [HideInInspector] public string before_gen;
-
-        [HideInInspector] public string after_gen;
-
-        #endregion
-
         #region 必要参数
 
-        [HideInInspector] public string which_dll = "../Tools/Luban.ClientServer/Luban.ClientServer.dll";
+        [HideInInspector] public string which_dll = "./Tools~/Luban.dll";
 
-        [HideInInspector] [Command("-t", false)]
+        [HideInInspector] [Command("--customTemplateDir ", false)]
         public string tpl_path;
 
-        [Command("-j")] [HideInInspector] public string job = "cfg --";
+        [Command("--conf ")] [HideInInspector] public string job = "./Config/Luban.conf";
 
-        [Command("-d")] [HideInInspector] public string define_xml;
+        [Command("--dataTarget ")] [HideInInspector]
+        public GenTypes dataTarget;
 
-        [Command("--input_data_dir")] [HideInInspector]
-        public string input_data_dir;
+        [Command("--codeTarget ")] [HideInInspector]
+        public GenTypes codeTarget;
 
-        [Command("--gen_types")] [HideInInspector]
-        public GenTypes gen_types;
-
-
-        [Command("-s")] [Tooltip("一般为 server, client 等")] [HideInInspector]
-        public string service;
-
-        /*private ValueDropdownList<string> service_dropdown
-        {
-            get
-            {
-                if (_service_dropdown != null)
-                {
-                    return _service_dropdown;
-                }
-
-                _service_dropdown = new ValueDropdownList<string>();
-
-                if (!File.Exists(define_xml))
-                {
-                    return _service_dropdown;
-                }
-
-                var doc = new XmlDocument();
-                doc.Load(define_xml);
-
-                XmlNodeList nodes = doc.DocumentElement.SelectNodes("service");
-
-                if (nodes is null || nodes.Count <= 0)
-                {
-                    return _service_dropdown;
-                }
-
-                for (int i = 0; i < nodes.Count; i++)
-                {
-                    string name = nodes[i].Attributes["name"].Value.Trim();
-
-                    if (string.IsNullOrEmpty(name))
-                    {
-                        continue;
-                    }
-
-                    _service_dropdown.Add(name);
-                }
-
-                return _service_dropdown;
-            }
-        }
-
-        private ValueDropdownList<string> _service_dropdown;
-
-        private void _OnDefineChange()
-        {
-            if (!File.Exists(define_xml))
-            {
-                return;
-            }
-
-            _service_dropdown = null;
-        }*/
+        [Command("--target ")] [Tooltip("一般为 server, client 等")] [HideInInspector]
+        public TargetName service;
 
         #endregion
 
         #region 输出配置
 
-        [Command("--output_data_dir")] [HideInInspector]
+        [Command("--xargs outputDataDir=")] [HideInInspector]
         public string output_data_dir;
 
-        [Command("--output_code_dir")] [HideInInspector]
+        [Command("--xargs outputCodeDir=")] [HideInInspector]
         public string output_code_dir;
 
         [Command("--output:data:resource_list_file")] [HideInInspector]
@@ -153,53 +88,37 @@ namespace Luban.Editor
 
         #region 其他
 
-        [Command("--naming_convention:module")] [HideInInspector]
-        public NamingConvertion naming_convertion_module = NamingConvertion.PascalCase;
-
-        [Command("--naming_convention:bean_member")] [HideInInspector]
-        public NamingConvertion naming_convertion_bean_member = NamingConvertion.PascalCase;
-
-        [Command("--naming_convention:enum_member")] [HideInInspector]
-        public NamingConvertion naming_convertion_enum_member = NamingConvertion.PascalCase;
-
-        [Command("--cs:use_unity_vector")] [HideInInspector]
-        public bool cs_use_unity_vestor;
-
-        [Command("--external:selectors")] [HideInInspector]
-        public string external_selectors;
-
-
-        [TextArea(5, 15)] [HideInInspector] public string preview_command;
+        [TextArea(5, 15)] 
+        [HideInInspector] 
+        public string preview_command;
 
         #endregion
 
         public void Gen()
         {
             Preview();
-            GenUtils.Gen(_GetCommand(), before_gen, after_gen);
+            GenUtils.Gen(_GetCommand());
         }
 
         private void Generator(bool isServer)
         {
             if (isServer)
             {
-                service = "server";
-                gen_types = GenTypes.code_cs_dotnet_json | GenTypes.data_json;
+                service = TargetName.server;
+                codeTarget = GenTypes.cs_dotnet_json;
                 output_code_dir = "../Server/Server.Config/Config";
                 output_data_dir = "../Server/Server.Config/Json";
             }
             else
             {
-                service = "client";
-                gen_types = GenTypes.code_cs_unity_json | GenTypes.data_json;
+                service = TargetName.client;
+                codeTarget = GenTypes.cs_simple_json;
                 output_code_dir = "Assets/Hotfix/Config/Generate";
                 output_data_dir = "Assets/Bundles/Config";
             }
 
-            define_xml = "../Config/Defines/__root__.xml";
-            input_data_dir = "../Config/Excels";
             Preview();
-            GenUtils.Gen(_GetCommand(), before_gen, after_gen);
+            GenUtils.Gen(_GetCommand());
         }
 
         /// <summary>
@@ -284,7 +203,7 @@ namespace Luban.Editor
 
                 value = value.Replace(", ", ",");
 
-                sb.Append($" {command.Option} {value} ");
+                sb.Append($" {command.Option}{value} ");
 
                 if (command.NewLine)
                 {

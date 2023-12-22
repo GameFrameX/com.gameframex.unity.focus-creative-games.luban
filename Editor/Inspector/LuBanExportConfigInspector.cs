@@ -6,7 +6,6 @@ namespace Luban.Editor
     [CustomEditor(typeof(LubanExportConfig))]
     public class LuBanExportConfigInspector : UnityEditor.Editor
     {
-        private SerializedProperty m_input_data_dir;
         private SerializedProperty m_output_data_dir;
         private SerializedProperty m_tpl_path;
         private SerializedProperty m_which_dll;
@@ -17,11 +16,12 @@ namespace Luban.Editor
         private SerializedProperty m_output_data_compact_json;
         private SerializedProperty m_output_data_json_monolithic_file;
         private SerializedProperty m_preview_command;
-        private SerializedProperty m_before_gen;
-        private SerializedProperty m_after_gen;
+
         private SerializedProperty m_job;
-        private SerializedProperty m_define_xml;
-        private SerializedProperty m_gen_types;
+
+        // private SerializedProperty m_define_xml;
+        private SerializedProperty m_codeTarget;
+        private SerializedProperty m_dataTarget;
         private SerializedProperty m_service;
         private SerializedProperty m_i10n_timezone;
         private SerializedProperty m_i10n_input_text_files;
@@ -29,23 +29,15 @@ namespace Luban.Editor
         private SerializedProperty m_i10n_output_not_translated_text_file;
         private SerializedProperty m_i10n_path;
         private SerializedProperty m_i10n_patch_input_data_dir;
-        private SerializedProperty m_naming_convertion_module;
-        private SerializedProperty m_naming_convertion_bean_member;
-        private SerializedProperty m_naming_convertion_enum_member;
-        private SerializedProperty m_external_selectors;
 
         private void OnEnable()
         {
-            m_before_gen = serializedObject.FindProperty("before_gen");
-            m_after_gen = serializedObject.FindProperty("after_gen");
             m_which_dll = serializedObject.FindProperty("which_dll");
             m_tpl_path = serializedObject.FindProperty("tpl_path");
             m_job = serializedObject.FindProperty("job");
-            m_define_xml = serializedObject.FindProperty("define_xml");
-            m_gen_types = serializedObject.FindProperty("gen_types");
+            m_codeTarget = serializedObject.FindProperty("codeTarget");
+            m_dataTarget = serializedObject.FindProperty("dataTarget");
             m_service = serializedObject.FindProperty("service");
-
-            m_input_data_dir = serializedObject.FindProperty("input_data_dir");
 
             m_output_data_dir = serializedObject.FindProperty("output_data_dir");
             m_output_code_dir = serializedObject.FindProperty("output_code_dir");
@@ -62,12 +54,6 @@ namespace Luban.Editor
             m_i10n_path = serializedObject.FindProperty("i10n_path");
             m_i10n_patch_input_data_dir = serializedObject.FindProperty("i10n_patch_input_data_dir");
 
-            m_naming_convertion_module = serializedObject.FindProperty("naming_convertion_module");
-            m_naming_convertion_bean_member = serializedObject.FindProperty("naming_convertion_bean_member");
-            m_naming_convertion_enum_member = serializedObject.FindProperty("naming_convertion_enum_member");
-
-            m_external_selectors = serializedObject.FindProperty("external_selectors");
-
 
             m_preview_command = serializedObject.FindProperty("preview_command");
         }
@@ -78,17 +64,13 @@ namespace Luban.Editor
             base.OnInspectorGUI();
             var config = (LubanExportConfig)target;
 
-            EditorGUILayout.PropertyField(m_before_gen, new GUIContent("前置命令"));
-            EditorGUILayout.PropertyField(m_after_gen, new GUIContent("后置命令"));
-
             EditorGUILayout.PropertyField(m_which_dll, new GUIContent("Client&Server Dll"));
             EditorGUILayout.PropertyField(m_tpl_path, new GUIContent("模板路径"));
             EditorGUILayout.PropertyField(m_job, new GUIContent("任务"));
-            EditorGUILayout.PropertyField(m_define_xml, new GUIContent("定义XML"));
-            EditorGUILayout.PropertyField(m_gen_types, new GUIContent("生成类型"));
+            // EditorGUILayout.PropertyField(m_define_xml, new GUIContent("定义XML"));
+            EditorGUILayout.PropertyField(m_codeTarget, new GUIContent("生成类型"));
+            EditorGUILayout.PropertyField(m_dataTarget, new GUIContent("生成类型"));
             EditorGUILayout.PropertyField(m_service, new GUIContent("服务类型"));
-
-            EditorGUILayout.PropertyField(m_input_data_dir, new GUIContent("输入数据文件夹"));
 
             EditorGUILayout.PropertyField(m_output_data_dir, new GUIContent("输出数据文件夹"));
             EditorGUILayout.PropertyField(m_output_code_dir, new GUIContent("输出代码文件夹"));
@@ -105,12 +87,6 @@ namespace Luban.Editor
             EditorGUILayout.PropertyField(m_i10n_output_not_translated_text_file, new GUIContent("未翻译文本存放位置"));
             EditorGUILayout.PropertyField(m_i10n_path, new GUIContent("多语言文件夹"));
             EditorGUILayout.PropertyField(m_i10n_patch_input_data_dir, new GUIContent("多语言补丁文件夹"));
-
-            EditorGUILayout.PropertyField(m_naming_convertion_module, new GUIContent("Bean 命名风格"));
-            EditorGUILayout.PropertyField(m_naming_convertion_bean_member, new GUIContent("Bean 命名风格"));
-            EditorGUILayout.PropertyField(m_naming_convertion_enum_member, new GUIContent("Enum 命名风格"));
-
-            EditorGUILayout.PropertyField(m_external_selectors, new GUIContent("外部选择器"));
 
             EditorGUILayout.PropertyField(m_preview_command, new GUIContent("预览命令"));
 
