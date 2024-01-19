@@ -1,4 +1,4 @@
-﻿namespace Bright.Serialization
+﻿namespace LuBan.Runtime
 {
     public interface ITypeId
     {

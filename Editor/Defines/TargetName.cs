@@ -1,5 +1,8 @@
 namespace Luban.Editor
 {
+    /// <summary>
+    /// 导出目标名称
+    /// </summary>
     public enum TargetName
     {
         /// <summary>

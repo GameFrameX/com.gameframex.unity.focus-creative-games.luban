@@ -21,18 +21,33 @@ namespace Luban.Editor
     {
         #region 必要参数
 
+        /// <summary>
+        /// DLL 路径
+        /// </summary>
         [HideInInspector] public string which_dll = "./Tools~/Luban.dll";
 
+        /// <summary>
+        /// 自定义模版路径
+        /// </summary>
         [HideInInspector] [Command("--customTemplateDir ", false)]
-        public string tpl_path;
+        public string TemplatePath = "./../Templates~";
 
-        [Command("--conf ")] [HideInInspector] public string job = "./Config/Luban.conf";
+        /// <summary>
+        /// Luban.conf 配置文件路径
+        /// </summary>
+        [Command("--conf ")] [HideInInspector] public string LuBanConfigPath = "./Config/Luban.conf";
 
+        /// <summary>
+        /// 导出的数据类型
+        /// </summary>
         [Command("--dataTarget ")] [HideInInspector]
-        public GenTypes dataTarget;
+        public DataTargetType dataTarget;
 
+        /// <summary>
+        /// 导出的代码类型
+        /// </summary>
         [Command("--codeTarget ")] [HideInInspector]
-        public GenTypes codeTarget;
+        public CodeTargetType codeTarget;
 
         [Command("--target ")] [Tooltip("一般为 server, client 等")] [HideInInspector]
         public TargetName service;
@@ -42,25 +57,10 @@ namespace Luban.Editor
         #region 输出配置
 
         [Command("--xargs outputDataDir=")] [HideInInspector]
-        public string output_data_dir;
+        public string output_data_dir = "./../../../Assets/Bundles/Config";
 
         [Command("--xargs outputCodeDir=")] [HideInInspector]
-        public string output_code_dir;
-
-        [Command("--output:data:resource_list_file")] [HideInInspector]
-        public string output_data_resources_list_file;
-
-        [Command("--output:exclude_tags")] [HideInInspector]
-        public string output_exclude_tags;
-
-        [Command("--output:data:file_extension")] [HideInInspector]
-        public string output_data_file_extension;
-
-        [Command("--output:data:compact_json")] [HideInInspector]
-        public bool output_data_compact_json;
-
-        [Command("--output:data:json_monolithic_file")] [HideInInspector]
-        public string output_data_json_monolithic_file;
+        public string output_code_dir = "./../../../Assets/Hotfix/Config/Generate";
 
         #endregion
 
@@ -88,16 +88,14 @@ namespace Luban.Editor
 
         #region 其他
 
-        [TextArea(5, 15)] 
-        [HideInInspector] 
-        public string preview_command;
+        [TextArea(5, 15)] [HideInInspector] public string preview_command;
 
         #endregion
 
         public void Gen()
         {
             Preview();
-            GenUtils.Gen(_GetCommand());
+            GenUtils.Gen(_GetCommand(), Application.dataPath);
         }
 
         private void Generator(bool isServer)
@@ -105,14 +103,16 @@ namespace Luban.Editor
             if (isServer)
             {
                 service = TargetName.server;
-                codeTarget = GenTypes.cs_dotnet_json;
+                codeTarget = CodeTargetType.cs_dotnet_json;
+                dataTarget = DataTargetType.json;
                 output_code_dir = "../Server/Server.Config/Config";
                 output_data_dir = "../Server/Server.Config/Json";
             }
             else
             {
                 service = TargetName.client;
-                codeTarget = GenTypes.cs_simple_json;
+                codeTarget = CodeTargetType.cs_simple_json;
+                dataTarget = DataTargetType.json;
                 output_code_dir = "Assets/Hotfix/Config/Generate";
                 output_data_dir = "Assets/Bundles/Config";
             }
@@ -127,11 +127,6 @@ namespace Luban.Editor
         [MenuItem("Tools/LuBan Config/Generator Client")]
         public static void AutoGenClient()
         {
-            // var fromScriptableObject = MonoScript.FromScriptableObject(CreateInstance<LubanExportConfig>());
-            // var assetPath = AssetDatabase.GetAssetPath(fromScriptableObject);
-            //
-            // Debug.Log(assetPath);
-
             CreateInstance<LubanExportConfig>()?.Generator(false);
         }
 
@@ -156,6 +151,19 @@ namespace Luban.Editor
             AssetDatabase.Refresh();
         }
 
+
+        /// <summary>
+        /// 获取LuBan工作路径
+        /// </summary>
+        /// <returns></returns>
+        private string GetLuBanWorkPath()
+        {
+            var fromScriptableObject = MonoScript.FromScriptableObject(this);
+            var assetPath = AssetDatabase.GetAssetPath(fromScriptableObject);
+            DirectoryInfo directoryInfo = new DirectoryInfo(assetPath);
+            return directoryInfo.Parent.Parent.FullName;
+        }
+
         // [Button("预览")]
         public void Preview()
         {
@@ -164,12 +172,11 @@ namespace Luban.Editor
 
         private string _GetCommand()
         {
-            var fromScriptableObject = MonoScript.FromScriptableObject(this);
-            var assetPath = AssetDatabase.GetAssetPath(fromScriptableObject);
-            DirectoryInfo directoryInfo = new DirectoryInfo(assetPath);
-            tpl_path = directoryInfo.Parent.Parent + "/Templates";
-
-            string lineEnd = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? " ^" : " \\";
+            string luBanWorkPath = GetLuBanWorkPath();
+            which_dll = luBanWorkPath + "/Tools~/Luban.dll";
+            TemplatePath = luBanWorkPath + "/Templates~";
+            LuBanConfigPath = GenUtils.GetProjectPath + "/../Config/Luban.conf";
+            string lineEnd = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".bat" : ".sh";
 
             StringBuilder sb = new StringBuilder();
 
@@ -177,16 +184,17 @@ namespace Luban.Editor
 
             sb.Append(which_dll);
 
-            foreach (var field_info in fields)
+            foreach (var fieldInfo in fields)
             {
-                var command = field_info.GetCustomAttribute<CommandAttribute>();
+                var command = fieldInfo.GetCustomAttribute<CommandAttribute>();
 
                 if (command is null)
                 {
                     continue;
                 }
 
-                var value = field_info.GetValue(this)?.ToString();
+                var value = fieldInfo.GetValue(this)?.ToString();
+
 
                 // 当前值为空 或者 False, 或者 None(Enum 默认值)
                 // 则继续循环
@@ -195,6 +203,10 @@ namespace Luban.Editor
                     continue;
                 }
 
+                if (fieldInfo.FieldType == typeof(CodeTargetType) || fieldInfo.FieldType == typeof(DataTargetType))
+                {
+                    value = value.Replace("_", "-");
+                }
 
                 if (string.Equals(value, "True"))
                 {
@@ -204,11 +216,6 @@ namespace Luban.Editor
                 value = value.Replace(", ", ",");
 
                 sb.Append($" {command.Option}{value} ");
-
-                if (command.NewLine)
-                {
-                    sb.Append($"{lineEnd} \n");
-                }
             }
 
             return sb.ToString();

@@ -1,12 +1,10 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Bright.Serialization
+namespace LuBan.Runtime
 {
-
     public enum EDeserializeError
     {
         OK,
@@ -17,8 +15,13 @@ namespace Bright.Serialization
 
     public class SerializationException : Exception
     {
-        public SerializationException() { }
-        public SerializationException(string msg) : base(msg) { }
+        public SerializationException()
+        {
+        }
+
+        public SerializationException(string msg) : base(msg)
+        {
+        }
 
         public SerializationException(string message, Exception innerException) : base(message, innerException)
         {
@@ -99,7 +102,10 @@ namespace Bright.Serialization
 
         public int Capacity => Bytes.Length;
 
-        public int Size { get { return WriterIndex - ReaderIndex; } }
+        public int Size
+        {
+            get { return WriterIndex - ReaderIndex; }
+        }
 
         public bool Empty => WriterIndex <= ReaderIndex;
 
@@ -135,7 +141,10 @@ namespace Bright.Serialization
             }
         }
 
-        public int Remaining { get { return WriterIndex - ReaderIndex; } }
+        public int Remaining
+        {
+            get { return WriterIndex - ReaderIndex; }
+        }
 
         public void DiscardReadBytes()
         {
@@ -144,7 +153,10 @@ namespace Bright.Serialization
             ReaderIndex = 0;
         }
 
-        public int NotCompactWritable { get { return Capacity - WriterIndex; } }
+        public int NotCompactWritable
+        {
+            get { return Capacity - WriterIndex; }
+        }
 
         public void WriteBytesWithoutSize(byte[] bs)
         {
@@ -167,7 +179,7 @@ namespace Bright.Serialization
 
         private static int PropSize(int initSize, int needSize)
         {
-            for (int i = Math.Max(initSize, MIN_CAPACITY); ; i <<= 1)
+            for (int i = Math.Max(initSize, MIN_CAPACITY);; i <<= 1)
             {
                 if (i >= needSize)
                 {
@@ -270,6 +282,7 @@ namespace Bright.Serialization
                     return;
                 }
             }
+
             EnsureWrite(3);
             Bytes[WriterIndex] = 0xff;
             Bytes[WriterIndex + 2] = (byte)x;
@@ -429,7 +442,6 @@ namespace Bright.Serialization
             }
             else if (h < 0xf0)
             {
-
                 EnsureRead(4);
                 uint x = ((h & 0x0f) << 24) | ((uint)Bytes[ReaderIndex + 1] << 16) | ((uint)Bytes[ReaderIndex + 2] << 8) | Bytes[ReaderIndex + 3];
                 ReaderIndex += 4;
@@ -452,7 +464,7 @@ namespace Bright.Serialization
                 EnsureWrite(1);
                 Bytes[WriterIndex++] = (byte)(x << 1);
             }
-            else if (x < 0x4000)// 10 11 1111, -
+            else if (x < 0x4000) // 10 11 1111, -
             {
                 EnsureWrite(2);
 
@@ -471,6 +483,7 @@ namespace Bright.Serialization
                 {
                     *(uint*)(wb) = (x << 3 | 0b011);
                 }
+
                 WriterIndex += 3;
             }
             else if (x < 0x10000000) // 1110 1111,-,-,-
@@ -480,6 +493,7 @@ namespace Bright.Serialization
                 {
                     *(uint*)(wb) = (x << 4 | 0b0111);
                 }
+
                 WriterIndex += 4;
             }
             else
@@ -489,6 +503,7 @@ namespace Bright.Serialization
                 {
                     *(uint*)(wb) = (x << 5 | 0b01111);
                 }
+
                 WriterIndex += 5;
             }
         }
@@ -1057,6 +1072,7 @@ namespace Bright.Serialization
                     // 只缓存比较小的字符串
                     s = StringCacheFinder(Bytes, ReaderIndex, n);
                 }
+
                 ReaderIndex += n;
                 return s;
             }
@@ -1279,19 +1295,31 @@ namespace Bright.Serialization
                 }
                 else if (h < 0xc0)
                 {
-                    if (!CanRead(2)) { return EDeserializeError.NOT_ENOUGH; }
+                    if (!CanRead(2))
+                    {
+                        return EDeserializeError.NOT_ENOUGH;
+                    }
+
                     n = ((h & 0x3f) << 8) | Bytes[ReaderIndex + 1];
                     ReaderIndex += 2;
                 }
                 else if (h < 0xe0)
                 {
-                    if (!CanRead(3)) { return EDeserializeError.NOT_ENOUGH; }
+                    if (!CanRead(3))
+                    {
+                        return EDeserializeError.NOT_ENOUGH;
+                    }
+
                     n = ((h & 0x1f) << 16) | (Bytes[ReaderIndex + 1] << 8) | Bytes[ReaderIndex + 2];
                     ReaderIndex += 3;
                 }
                 else if (h < 0xf0)
                 {
-                    if (!CanRead(4)) { return EDeserializeError.NOT_ENOUGH; }
+                    if (!CanRead(4))
+                    {
+                        return EDeserializeError.NOT_ENOUGH;
+                    }
+
                     n = ((h & 0x0f) << 24) | (Bytes[ReaderIndex + 1] << 16) | (Bytes[ReaderIndex + 2] << 8) | Bytes[ReaderIndex + 3];
                     ReaderIndex += 4;
                 }
@@ -1304,6 +1332,7 @@ namespace Bright.Serialization
                 {
                     return EDeserializeError.EXCEED_SIZE;
                 }
+
                 if (Remaining < n)
                 {
                     return EDeserializeError.NOT_ENOUGH;
@@ -1350,7 +1379,6 @@ namespace Bright.Serialization
         }
 
         #region segment
-
 
         public void BeginWriteSegment(out int oldSize)
         {
@@ -1454,6 +1482,7 @@ namespace Bright.Serialization
             {
                 throw new SerializationException("exceed max size");
             }
+
             if (ReaderIndex > WriterIndex)
             {
                 throw new SerializationException("segment data not enough");
@@ -1492,6 +1521,7 @@ namespace Bright.Serialization
             {
                 datas[i - ReaderIndex] = Bytes[i].ToString("X2");
             }
+
             return string.Join(".", datas);
         }
 
@@ -1506,10 +1536,12 @@ namespace Bright.Serialization
             {
                 return false;
             }
+
             if (Size != other.Size)
             {
                 return false;
             }
+
             for (int i = 0, n = Size; i < n; i++)
             {
                 if (Bytes[ReaderIndex + i] != other.Bytes[other.ReaderIndex + i])
@@ -1517,6 +1549,7 @@ namespace Bright.Serialization
                     return false;
                 }
             }
+
             return true;
         }
 
@@ -1534,6 +1567,7 @@ namespace Bright.Serialization
             {
                 data[i] = byte.Parse(ss[i]);
             }
+
             return new ByteBuf(data);
         }
 
@@ -1544,6 +1578,7 @@ namespace Bright.Serialization
             {
                 hash = hash * 23 + Bytes[i];
             }
+
             return hash;
         }
 

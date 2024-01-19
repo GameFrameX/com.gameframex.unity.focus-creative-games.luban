@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using UnityEditor;
+using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 namespace Luban.Editor
@@ -13,27 +14,49 @@ namespace Luban.Editor
         internal static readonly string _DOTNET = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "dotnet.exe" : "dotnet";
 
         /// <summary>
+        /// 获取项目路径
+        /// </summary>
+        public static string GetProjectPath
+        {
+            get { return new DirectoryInfo(Application.dataPath).Parent.FullName; }
+        }
+
+        /// <summary>
         /// 生成执行
         /// </summary>
         /// <param name="arguments">参数</param>
-        public static void Gen(string arguments)
+        /// <param name="workingDir">工作路径</param>
+        public static void Gen(string arguments, string workingDir = ".")
         {
-            Debug.Log(arguments);
+            string logPath = GetProjectPath + "/Logs";
+            if (!Directory.Exists(logPath))
+            {
+                Directory.CreateDirectory(logPath);
+            }
+
+            Debug.Log("生成命令:" + arguments);
 
             var process = _Run(
                 _DOTNET,
                 arguments,
-                ".",
+                workingDir,
                 true
             );
 
             #region 捕捉生成错误
 
             string processLog = process.StandardOutput.ReadToEnd();
-            Debug.Log(processLog);
+
+
             if (process.ExitCode != 0)
             {
-                Debug.LogError("Error  生成出现错误");
+                string errorPath = logPath + "/LubanGenLog" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".txt";
+                File.WriteAllText(errorPath, processLog);
+                Debug.LogError("Error  生成出现错误.日志路径:" + errorPath);
+            }
+            else
+            {
+                Debug.Log("生成成功");
             }
 
             #endregion
