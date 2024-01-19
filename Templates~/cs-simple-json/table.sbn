@@ -44,12 +44,12 @@ using SimpleJSON;
             _dataMap = new System.Collections.Generic.Dictionary<{{declaring_type_name __key_type}}, {{declaring_type_name __value_type}}>();
             _dataList = new System.Collections.Generic.List<{{declaring_type_name __value_type}}>();
             
-            foreach(JSONNode node in jsonNode.Children)
+            foreach(JSONNode vNode in jsonNode.Children)
             {
-                {{declaring_type_name __value_type}} item;
-                {{deserialize 'item' 'node' __value_type}}
-                _dataList.Add(item);
-                _dataMap.Add(item.{{format_property_name __code_style __table.index_field.name}}, item);
+                {{declaring_type_name __value_type}} deserializeItem;
+                {{deserialize 'deserializeItem' 'vNode' __value_type}}
+                _dataList.Add(deserializeItem);
+                _dataMap.Add(deserializeItem.{{format_property_name __code_style __table.index_field.name}}, deserializeItem);
             }
         }
     
@@ -108,11 +108,11 @@ using SimpleJSON;
         {
             _dataList = new System.Collections.Generic.List<{{declaring_type_name __value_type}}>();
             
-            foreach(JSONNode node in _buf.Children)
+            foreach(JSONNode _ele in _buf.Children)
             {
-                {{declaring_type_name __value_type}} node;
-                {{deserialize 'node' '_ele' __value_type}}
-                _dataList.Add(node);
+                {{declaring_type_name __value_type}} vNode;
+                {{deserialize 'vNode' '_ele' __value_type}}
+                _dataList.Add(vNode);
             }
         {{~if __table.is_union_index~}}
             _dataMapUnion = new {{table_union_map_type_name}}();
