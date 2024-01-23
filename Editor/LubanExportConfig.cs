@@ -64,25 +64,25 @@ namespace Luban.Editor
 
         #endregion
 
+        [Command("--timeZone ")] [HideInInspector]
+        public string timeZone = "Asia/Shanghai";
+
+        [Command("--validationFailAsError ")] [HideInInspector]
+        public string validationFailAsError = "";
+
         #region I10N
 
-        [Command("--l10n:timezone")] [HideInInspector]
-        public string i10n_timezone;
+        /// <summary>
+        /// 多语言输出文件路径
+        /// </summary>
+        [Command("--xargs l10n.textListFile=")] [HideInInspector]
+        public string i10n_output_text_file;
 
-        [Command("--l10n:input_text_files")] [HideInInspector]
-        public string i10n_input_text_files;
-
-        [Command("--l10n:text_field_name")] [HideInInspector]
-        public string i10n_text_field_name;
-
-        [Command("--l10n:output_not_translated_text_file")] [HideInInspector]
-        public string i10n_output_not_translated_text_file;
-
-        [Command("--l10n:patch")] [HideInInspector]
-        public string i10n_path;
-
-        [Command("--l10n:patch_input_data_dir")] [HideInInspector]
-        public string i10n_patch_input_data_dir;
+        /// <summary>
+        /// 多语言输入文件
+        /// </summary>
+        [Command("--xargs l10n.textProviderFile=")] [HideInInspector]
+        public string i10n_input_text_file;
 
         #endregion
 

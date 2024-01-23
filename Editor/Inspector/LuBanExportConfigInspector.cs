@@ -14,12 +14,9 @@ namespace Luban.Editor
         private SerializedProperty m_codeTarget;
         private SerializedProperty m_dataTarget;
         private SerializedProperty m_service;
-        private SerializedProperty m_i10n_timezone;
-        private SerializedProperty m_i10n_input_text_files;
-        private SerializedProperty m_i10n_text_field_name;
-        private SerializedProperty m_i10n_output_not_translated_text_file;
-        private SerializedProperty m_i10n_path;
-        private SerializedProperty m_i10n_patch_input_data_dir;
+        private SerializedProperty m_timezone;
+        private SerializedProperty m_i10n_output_text_file;
+        private SerializedProperty m_i10n_input_text_file;
 
         private void OnEnable()
         {
@@ -32,12 +29,9 @@ namespace Luban.Editor
             m_output_data_dir = serializedObject.FindProperty("output_data_dir");
             m_output_code_dir = serializedObject.FindProperty("output_code_dir");
 
-            m_i10n_timezone = serializedObject.FindProperty("i10n_timezone");
-            m_i10n_input_text_files = serializedObject.FindProperty("i10n_input_text_files");
-            m_i10n_text_field_name = serializedObject.FindProperty("i10n_text_field_name");
-            m_i10n_output_not_translated_text_file = serializedObject.FindProperty("i10n_output_not_translated_text_file");
-            m_i10n_path = serializedObject.FindProperty("i10n_path");
-            m_i10n_patch_input_data_dir = serializedObject.FindProperty("i10n_patch_input_data_dir");
+            m_timezone = serializedObject.FindProperty("timeZone");
+            m_i10n_output_text_file = serializedObject.FindProperty("i10n_output_text_file");
+            m_i10n_input_text_file = serializedObject.FindProperty("i10n_input_text_file");
 
 
             m_preview_command = serializedObject.FindProperty("preview_command");
@@ -59,12 +53,9 @@ namespace Luban.Editor
             EditorGUILayout.PropertyField(m_output_data_dir, new GUIContent("输出数据文件夹"));
             EditorGUILayout.PropertyField(m_output_code_dir, new GUIContent("输出代码文件夹"));
 
-            EditorGUILayout.PropertyField(m_i10n_timezone, new GUIContent("多语言时区"));
-            EditorGUILayout.PropertyField(m_i10n_input_text_files, new GUIContent("多语言文本文件"));
-            EditorGUILayout.PropertyField(m_i10n_text_field_name, new GUIContent("多语言文本字段名"));
-            EditorGUILayout.PropertyField(m_i10n_output_not_translated_text_file, new GUIContent("未翻译文本存放位置"));
-            EditorGUILayout.PropertyField(m_i10n_path, new GUIContent("多语言文件夹"));
-            EditorGUILayout.PropertyField(m_i10n_patch_input_data_dir, new GUIContent("多语言补丁文件夹"));
+            EditorGUILayout.PropertyField(m_timezone, new GUIContent("时区"));
+            EditorGUILayout.PropertyField(m_i10n_input_text_file, new GUIContent("多语言输入文件"));
+            EditorGUILayout.PropertyField(m_i10n_output_text_file, new GUIContent("多语言文本输出文件"));
 
             EditorGUILayout.PropertyField(m_preview_command, new GUIContent("预览命令"));
 
