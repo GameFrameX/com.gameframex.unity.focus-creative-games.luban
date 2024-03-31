@@ -21,6 +21,76 @@ namespace Luban.Editor
             get { return new DirectoryInfo(Application.dataPath).Parent.FullName; }
         }
 
+        private static bool RunCommand(string cmd, string workDir, string logHeader, bool showInfo)
+        {
+            bool isSuccess = true;
+            Process process = new Process();
+            try
+            {
+                string app = "bash";
+                string arguments = "-c";
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    app = "cmd.exe";
+                    arguments = "/c";
+                }
+
+                ProcessStartInfo start = new ProcessStartInfo(app);
+
+                process.StartInfo = start;
+                start.Arguments = arguments + " \"" + cmd + "\"";
+                start.CreateNoWindow = true;
+                start.ErrorDialog = true;
+                start.UseShellExecute = false;
+                start.WorkingDirectory = workDir;
+
+                start.RedirectStandardOutput = true;
+                start.RedirectStandardError = true;
+                start.RedirectStandardInput = true;
+                // start.StandardOutputEncoding = s_Encoding;
+                // start.StandardErrorEncoding = s_Encoding;
+
+                process.OutputDataReceived += (sender, args) =>
+                {
+                    if (showInfo && !string.IsNullOrEmpty(args.Data))
+                    {
+                        if (args.Data.Contains("|ERROR|"))
+                        {
+                            Debug.LogError(args.Data);
+                        }
+                        else
+                        {
+                            Debug.Log(args.Data);
+                        }
+                    }
+                };
+                process.ErrorDataReceived += (sender, args) =>
+                {
+                    if (!string.IsNullOrEmpty(args.Data))
+                    {
+                        isSuccess = false;
+                        Debug.LogWarning($"{logHeader} : {args.Data}");
+                    }
+                };
+
+                process.Start();
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
+                process.WaitForExit();
+            }
+            catch (Exception e)
+            {
+                isSuccess = false;
+                Debug.LogError(e);
+            }
+            finally
+            {
+                process.Close();
+            }
+
+            return isSuccess;
+        }
+
         /// <summary>
         /// 生成执行
         /// </summary>
@@ -35,81 +105,9 @@ namespace Luban.Editor
             }
 
             Debug.Log("生成命令:" + arguments);
-
-            var process = _Run(
-                _DOTNET,
-                arguments,
-                workingDir,
-                true
-            );
-
-            #region 捕捉生成错误
-
-            string processLog = process.StandardOutput.ReadToEnd();
-
-
-            if (process.ExitCode != 0)
-            {
-                string errorPath = logPath + "/LubanGenLog" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".txt";
-                File.WriteAllText(errorPath, processLog);
-                Debug.LogError("Error  生成出现错误.日志路径:" + errorPath);
-            }
-            else
-            {
-                Debug.Log("生成成功");
-            }
-
-            #endregion
+            RunCommand(arguments, workingDir, "生成", true);
 
             AssetDatabase.Refresh();
-        }
-
-        private static Process _Run(string exe, string arguments, string workingDir = ".", bool waitExit = false)
-        {
-            try
-            {
-                bool redirectStandardOutput = true;
-                bool redirectStandardError = true;
-                bool useShellExecute = false;
-
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    redirectStandardOutput = false;
-                    redirectStandardError = false;
-                    useShellExecute = true;
-                }
-
-                if (waitExit)
-                {
-                    redirectStandardOutput = true;
-                    redirectStandardError = true;
-                    useShellExecute = false;
-                }
-
-                ProcessStartInfo info = new ProcessStartInfo
-                {
-                    FileName = exe,
-                    Arguments = arguments,
-                    CreateNoWindow = true,
-                    UseShellExecute = useShellExecute,
-                    WorkingDirectory = workingDir,
-                    RedirectStandardOutput = redirectStandardOutput,
-                    RedirectStandardError = redirectStandardError,
-                };
-
-                Process process = Process.Start(info);
-
-                if (waitExit)
-                {
-                    WaitForExitAsync(process).ConfigureAwait(false);
-                }
-
-                return process;
-            }
-            catch (Exception e)
-            {
-                throw new Exception($"dir: {Path.GetFullPath(workingDir)}, command: {exe} {arguments}", e);
-            }
         }
 
         private static async Task WaitForExitAsync(this Process self)

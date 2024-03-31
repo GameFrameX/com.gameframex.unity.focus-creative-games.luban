@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Scripting;
 
 namespace LuBan.Runtime
 {
     /// <summary>
     /// 防止代码运行时发生裁剪报错。将这个脚本添加到启动场景中。不会对逻辑有任何影响
     /// </summary>
+    [Preserve]
     public class LuBanCroppingHelper : MonoBehaviour
     {
         void Start()
@@ -16,6 +18,8 @@ namespace LuBan.Runtime
             _ = typeof(LuBan.Runtime.ByteBuf);
             _ = typeof(LuBan.Runtime.ITypeId);
             _ = typeof(LuBan.Runtime.StringUtil);
+            _ = typeof(LuBan.Runtime.IDataTable<>);
+            _ = typeof(LuBan.Runtime.BaseDataTable<>);
         }
     }
 }
