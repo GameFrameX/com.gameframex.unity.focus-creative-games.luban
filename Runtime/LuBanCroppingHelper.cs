@@ -18,8 +18,6 @@ namespace LuBan.Runtime
             _ = typeof(LuBan.Runtime.ByteBuf);
             _ = typeof(LuBan.Runtime.ITypeId);
             _ = typeof(LuBan.Runtime.StringUtil);
-            _ = typeof(LuBan.Runtime.IDataTable<>);
-            _ = typeof(LuBan.Runtime.BaseDataTable<>);
         }
     }
 }
