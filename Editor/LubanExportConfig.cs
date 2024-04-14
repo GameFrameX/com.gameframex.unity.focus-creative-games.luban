@@ -18,26 +18,18 @@ using Debug = UnityEngine.Debug;
 
 namespace Luban.Editor
 {
-    [CreateAssetMenu(fileName = "Luban", menuName = "Luban/ExportConfig")]
-    public class LubanExportConfig : ScriptableObject
+    public static class LubanExportConfig
     {
         #region 必要参数
 
         /// <summary>
         /// Luban.conf 配置文件路径
         /// </summary>
-        [HideInInspector] public string LuBanConfigPath = "../Config/Luban.conf";
+        static  string LuBanConfigPath = "../Config/Luban.conf";
 
         #endregion
 
-
-        #region 其他
-
-        [TextArea(5, 15)] [HideInInspector] public string preview_command;
-
-        #endregion
-
-        public void Gen()
+        public static void Gen()
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -104,24 +96,7 @@ namespace Luban.Editor
         [MenuItem("Tools/LuBan Config/Export &G")]
         public static void AutoGenClient()
         {
-            CreateInstance<LubanExportConfig>()?.Gen();
-        }
-
-        /// <summary>
-        /// 获取LuBan工作路径
-        /// </summary>
-        /// <returns></returns>
-        private string GetLuBanWorkPath()
-        {
-            var fromScriptableObject = MonoScript.FromScriptableObject(this);
-            var assetPath = AssetDatabase.GetAssetPath(fromScriptableObject);
-            DirectoryInfo directoryInfo = new DirectoryInfo(assetPath);
-            return directoryInfo.Parent.Parent.FullName;
-        }
-
-        public void Preview()
-        {
-            // preview_command = $"{GenUtils._DOTNET} {_GetCommand()}";
+            Gen();
         }
     }
 }
