@@ -13,9 +13,9 @@ luban标准化了游戏配置开发工作流，可以极大提升策划和程序
 # 使用方式(三种方式)
 1. 直接在 `manifest.json` 文件中添加以下内容
    ```json
-      {"com.alianblank.gameframex.unity": "https://github.com/AlianBlank/com.alianblank.gameframex.unity.git"}
+      {"com.gameframex.unity.focus-creative-games.luban": "https://github.com/AlianBlank/com.gameframex.unity.focus-creative-games.luban.git"}
     ```
-2. 在Unity 的`Packages Manager` 中使用`Git URL` 的方式添加库,地址为：https://github.com/AlianBlank/com.alianblank.gameframex.unity.git
+2. 在Unity 的`Packages Manager` 中使用`Git URL` 的方式添加库,地址为：https://github.com/AlianBlank/com.gameframex.unity.focus-creative-games.luban.git
 
 3. 直接下载仓库放置到Unity 项目的`Packages` 目录下。会自动加载识别
 
