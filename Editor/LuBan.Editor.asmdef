@@ -1,6 +1,6 @@
 {
-    "name": "Luban.Editor",
-    "rootNamespace": "",
+    "name": "LuBan.Editor",
+    "rootNamespace": "LuBan.Editor",
     "references": [],
     "includePlatforms": [
         "Editor"
