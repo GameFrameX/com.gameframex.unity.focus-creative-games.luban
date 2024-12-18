@@ -1,8 +1,22 @@
 {
   "name": "com.gameframex.unity.focus-creative-games.luban",
-  "displayName": "LuBan Config Tools",
-  "description": "LuBan 可视化配置工具",
+  "displayName": "Game Frame X LuBan Config",
+  "category": "Game Framework X",
+  "description": "独立游戏前后端一体化解决方案 https://gameframex.doc.alianblank.com/",
   "version": "2.0.0",
-  "dependencies": {
-  }
+  "unity": "2019.4",
+  "keywords": [
+    "Game Framework X"
+  ],
+  "repository": {
+    "name": "com.gameframex.unity.web",
+    "url": "https://github.com/gameframex/com.gameframex.unity.web.git",
+    "type": "git"
+  },
+  "author": {
+    "name": "Blank",
+    "email": "alianblank@outlook.com",
+    "url": "https://gameframex.doc.alianblank.com"
+  },
+  "dependencies": {}
 }
