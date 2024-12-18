@@ -7,15 +7,15 @@ luban可以处理丰富的文件类型，支持主流的语言，可以生成多
 
 luban标准化了游戏配置开发工作流，可以极大提升策划和程序的工作效率。
 
-该库主要服务于 `https://github.com/AlianBlank/GameFrameX` 作为子库使用。
+该库主要服务于 `https://github.com/GameFrameX/GameFrameX` 作为子库使用。
 
 
 # 使用方式(三种方式)
 1. 直接在 `manifest.json` 文件中添加以下内容
    ```json
-      {"com.gameframex.unity.focus-creative-games.luban": "https://github.com/AlianBlank/com.gameframex.unity.focus-creative-games.luban.git"}
+      {"com.gameframex.unity.focus-creative-games.luban": "https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban.git"}
     ```
-2. 在Unity 的`Packages Manager` 中使用`Git URL` 的方式添加库,地址为：https://github.com/AlianBlank/com.gameframex.unity.focus-creative-games.luban.git
+2. 在Unity 的`Packages Manager` 中使用`Git URL` 的方式添加库,地址为：https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban.git
 
 3. 直接下载仓库放置到Unity 项目的`Packages` 目录下。会自动加载识别
 
@@ -23,12 +23,7 @@ luban标准化了游戏配置开发工作流，可以极大提升策划和程序
 
 1. 增加 `Packages` 的支持
 2. 移除ODIN 的依赖
-3. 增加一键导出功能
-4. 增加防裁剪的帮助类。需要在启动的主场景中挂载 `LuBanCroppingHelper` 脚本即可
-
-# 当前版本 `1.0.0`
-
-LuBan 的旧版解决方案。重构版本暂未同步。
+3. 增加防裁剪的帮助类。需要在启动的主场景中挂载 `LuBanCroppingHelper` 脚本即可
 
 # 使用文档
 
