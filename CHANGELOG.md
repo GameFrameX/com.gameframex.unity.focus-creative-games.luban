@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/compare/2.0.4...2.1.0) (2025-12-23)
+
+
+### Features
+
+* **ci:** change ci ([2344f40](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/commit/2344f4021e1e57d30737fba3690bd7d1f4884935))
+
 # Changelog
 
 ## [2.0.4](https://github.com/GameFrameX/com.gameframex.unity.focus-creative-games.luban/tree/2.0.4) (2025-06-01)
