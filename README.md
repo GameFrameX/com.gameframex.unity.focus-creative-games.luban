@@ -1,30 +1,67 @@
+<div align="center">
 
-# 非常强大的配置表解决方案
+<img src="https://download.alianblank.com/gameframex/gameframex_logo_320.png" alt="GameFrameX Logo" width="160"/>
 
-uban是一个强大、易用、优雅、稳定的游戏配置解决方案。它设计目标为满足从小型到超大型游戏项目的简单到复杂的游戏配置工作流需求。
+# Game Frame X Luban Config Component
 
-luban可以处理丰富的文件类型，支持主流的语言，可以生成多种导出格式，支持丰富的数据检验功能，具有良好的跨平台能力，并且生成极快。 luban有清晰优雅的生成管线设计，支持良好的模块化和插件化，方便开发者进行二次开发。开发者很容易就能将luban适配到自己的配置格式，定制出满足项目要求的强大的配置工具。
+[![License](https://img.shields.io/github/license/gameframex/com.gameframex.unity.focus-creative-games.luban)](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/blob/main/LICENSE)
+[![Version](https://img.shields.io/github/v/release/gameframex/com.gameframex.unity.focus-creative-games.luban)](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/releases)
+[![Documentation](https://img.shields.io/badge/Documentation-Documentation-blue)](https://gameframex.doc.alianblank.com)
 
-luban标准化了游戏配置开发工作流，可以极大提升策划和程序的工作效率。
+All-in-One Solution for Indie Game Development · Empowering Indie Developers' Dreams
 
-该库主要服务于 `https://github.com/GameFrameX/GameFrameX` 作为子库使用。
+[Documentation](https://gameframex.doc.alianblank.com) · [Quick Start](#quick-start) · [QQ Group](https://qm.qq.com/q/5kbDVBdUeS) · **Language**
 
+[English](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-# 使用方式(三种方式)
-1. 直接在 `manifest.json` 文件中添加以下内容
+</div>
+
+---
+
+## Project Overview
+
+A powerful game configuration solution. Luban is a powerful, easy-to-use, elegant, and stable game configuration solution designed to meet the workflow needs of game configuration from small to very large game projects.
+
+Luban can handle rich file types, supports mainstream languages, generates multiple export formats, supports rich data validation, has good cross-platform capability, and generates extremely fast. Luban has a clear and elegant generation pipeline design, supports good modularization and plugin capabilities, making it easy for developers to customize and adapt Luban to their own configuration formats.
+
+Luban standardizes the game configuration development workflow, greatly improving the efficiency of designers and programmers.
+
+This library primarily serves as a sub-module for [GameFrameX](https://github.com/GameFrameX/GameFrameX).
+
+### Modifications from Official Version
+
+1. Added Unity Package Manager support
+2. Removed ODIN dependency
+3. Added anti-stripping helper class. Mount the `LuBanCroppingHelper` script on the main startup scene.
+
+## Quick Start
+
+### Installation
+
+Choose one of the following methods:
+
+1. Add to `manifest.json` dependencies:
    ```json
-      {"com.gameframex.unity.focus-creative-games.luban": "https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban.git"}
-    ```
-2. 在Unity 的`Packages Manager` 中使用`Git URL` 的方式添加库,地址为：https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban.git
+   {
+      "com.gameframex.unity.focus-creative-games.luban": "https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban.git"
+   }
+   ```
+2. Use **Packages Manager** in Unity with **Git URL**: `https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban.git`
+3. Clone the repository into your Unity project's `Packages` directory. It will be loaded automatically.
 
-3. 直接下载仓库放置到Unity 项目的`Packages` 目录下。会自动加载识别
+## Documentation & Resources
 
-# 改动功能
+- [Luban Documentation](https://luban.doc.code-philosophy.com/docs/intro)
+- [GameFrameX Documentation](https://gameframex.doc.alianblank.com)
 
-1. 增加 `Packages` 的支持
-2. 移除ODIN 的依赖
-3. 增加防裁剪的帮助类。需要在启动的主场景中挂载 `LuBanCroppingHelper` 脚本即可
+## Community & Support
 
-# 使用文档
+- [QQ Group](https://qm.qq.com/q/5kbDVBdUeS)
 
-https://luban.doc.code-philosophy.com/docs/intro
+## Changelog
+
+See [Releases](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/releases) for changelog.
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/blob/main/LICENSE).
