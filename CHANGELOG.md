@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/compare/2.1.0...2.1.1) (2026-05-28)
+
+
+### Bug Fixes
+
+* **ci:** 统一 .github 工作流配置 ([52375c7](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/commit/52375c74c3be4b845df1ffabd28ef4d96450dc8b))
+
 # [2.1.0](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/compare/2.0.4...2.1.0) (2025-12-23)
 
 
