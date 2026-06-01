@@ -62,4 +62,4 @@ Luban 標準化了遊戲配置開發工作流，可以極大提升策劃和程�
 
 ## 開源協議
 
-本專案基於 [MIT 協議](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/blob/main/LICENSE) 開源。
+本專案基於 [LICENSE.md](LICENSE.md) 中描述的協議開源。

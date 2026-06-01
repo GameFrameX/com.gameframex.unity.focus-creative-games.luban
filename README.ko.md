@@ -62,4 +62,4 @@ Luban은 게임 설정 개발 워크플로우를 표준화하여 기획자와 �
 
 ## 라이선스
 
-이 프로젝트는 [MIT 라이선스](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/blob/main/LICENSE)에 따라 배포됩니다.
+이 프로젝트는 [LICENSE.md](LICENSE.md)에 명시된 조건에 따라 배포됩니다.

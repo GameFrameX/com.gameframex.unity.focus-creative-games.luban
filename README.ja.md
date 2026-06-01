@@ -62,4 +62,4 @@ Luban はゲームコンフィグ開発ワークフローを標準化し、プ�
 
 ## ライセンス
 
-このプロジェクトは [MIT ライセンス](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/blob/main/LICENSE) の下で公開されています。
+このプロジェクトは [LICENSE.md](LICENSE.md) に記載されている条件で公開されています。

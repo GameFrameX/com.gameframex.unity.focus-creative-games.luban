@@ -64,4 +64,4 @@ See [Releases](https://github.com/gameframex/com.gameframex.unity.focus-creative
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/blob/main/LICENSE).
+This project is open-sourced under the terms described in [LICENSE.md](LICENSE.md).
