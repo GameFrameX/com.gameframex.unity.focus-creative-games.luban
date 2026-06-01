@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/compare/2.1.1...2.1.2) (2026-06-01)
+
+
+### Bug Fixes
+
+* **readme:** 修复 English 版语言切换器当前语言未加粗 ([304556e](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/commit/304556e65dfc4d45242176a7dd382bacfcf9a1c4))
+
 ## [2.1.1](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/compare/2.1.0...2.1.1) (2026-05-28)
 
 
