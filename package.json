@@ -8,6 +8,9 @@
   "keywords": [
     "Game Framework X"
   ],
+  "documentationUrl": "https://gameframex.doc.alianblank.com",
+  "changelogUrl": "https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/blob/main/LICENSE.md",
   "repository": {
     "name": "com.gameframex.unity.focus-creative-games.luban",
     "url": "git+https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban.git",
