@@ -69,7 +69,6 @@ Then add the package to `dependencies`:
 }
 ```
 
-
 ## 文档与资源
 
 - [Luban 使用文档](https://luban.doc.code-philosophy.com/docs/intro)
@@ -85,4 +84,4 @@ Then add the package to `dependencies`:
 
 ## 开源协议
 
-本项目基于 [LICENSE.md](LICENSE.md) 中描述的协议开源。
+详见 [LICENSE.md](LICENSE.md) 文件。
