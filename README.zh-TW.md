@@ -83,6 +83,13 @@ Then add the package to `dependencies`:
 
 查看 [Releases](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/releases) 了解更新日誌。
 
+
+## 依賴
+
+| 套件 | 說明 |
+|------|------|
+| (无) | - |
+
 ## 開源協議
 
 本專案基於 [LICENSE.md](LICENSE.md) 中描述的協議開源。

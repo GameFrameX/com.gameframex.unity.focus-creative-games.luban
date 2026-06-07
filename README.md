@@ -83,6 +83,13 @@ Then add the package to `dependencies`:
 
 See [Releases](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/releases) for changelog.
 
+
+## Dependencies
+
+| Package | Description |
+|---------|-------------|
+| (无) | - |
+
 ## License
 
 This project is open-sourced under the terms described in [LICENSE.md](LICENSE.md).

@@ -83,6 +83,13 @@ Then add the package to `dependencies`:
 
 변경 로그는 [Releases](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/releases)에서 확인하세요.
 
+
+## 의존성
+
+| 패키지 | 설명 |
+|--------|------|
+| (无) | - |
+
 ## 라이선스
 
 이 프로젝트는 [LICENSE.md](LICENSE.md)에 명시된 조건에 따라 배포됩니다.

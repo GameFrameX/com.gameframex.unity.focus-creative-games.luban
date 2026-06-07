@@ -83,6 +83,13 @@ Then add the package to `dependencies`:
 
 変更履歴は [Releases](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/releases) をご覧ください。
 
+
+## 依存関係
+
+| パッケージ | 説明 |
+|----------|------|
+| (无) | - |
+
 ## ライセンス
 
 このプロジェクトは [LICENSE.md](LICENSE.md) に記載されている条件で公開されています。
