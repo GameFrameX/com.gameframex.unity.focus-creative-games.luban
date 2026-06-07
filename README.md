@@ -41,35 +41,36 @@ This library primarily serves as a sub-module for [GameFrameX](https://github.co
 
 ### Installation
 
-Edit your Unity project's `Packages/manifest.json` and add the `scopedRegistries` section:
+Choose one of the following methods:
 
-```json
-{
-  "scopedRegistries": [
-    {
-      "name": "GameFrameX",
-      "url": "https://gameframex.upm.alianblank.uk",
-      "scopes": [
-        "com.gameframex"
-      ]
-    }
-  ]
-}
-```
+1. Edit your Unity project's `Packages/manifest.json` and add the `scopedRegistries` section:
+   ```json
+   {
+     "scopedRegistries": [
+       {
+         "name": "GameFrameX",
+         "url": "https://gameframex.upm.alianblank.uk",
+         "scopes": [
+           "com.gameframex"
+         ]
+       }
+     ],
+     "dependencies": {
+       "com.gameframex.unity.focus-creative-games.luban": "2.1.2"
+     }
+   }
+   ```
 
-`scopes` controls which packages are resolved through this registry. Only packages whose names start with `com.gameframex` will be fetched from it.
+   `scopes` controls which packages are resolved through this registry. Only packages whose names start with `com.gameframex` will be fetched from it.
 
-Then add the package to `dependencies`:
-
-```json
-{
-  "dependencies": {
-    "com.gameframex.unity.focus-creative-games.luban": "2.1.2"
-  }
-}
-```
-
-
+2. Add to `manifest.json` dependencies:
+   ```json
+   {
+      "com.gameframex.unity.focus-creative-games.luban": "https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban.git"
+   }
+   ```
+3. Use **Package Manager** in Unity with **Git URL**: `https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban.git`
+4. Clone the repository into your Unity project's `Packages` directory. It will be loaded automatically.
 ## Documentation & Resources
 
 - [Luban Documentation](https://luban.doc.code-philosophy.com/docs/intro)
