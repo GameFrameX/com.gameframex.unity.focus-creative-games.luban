@@ -1,23 +1,24 @@
 <div align="center">
 
-<img src="https://download.alianblank.com/gameframex/gameframex_logo_320.png" alt="GameFrameX Logo" width="160"/>
+<img src="https://download.alianblank.com/gameframex/gameframex_logo_320.png" alt="Game Frame X Logo" width="160" />
 
 # Game Frame X Luban 설정 컴포넌트
 
-[![License](https://img.shields.io/github/license/gameframex/com.gameframex.unity.focus-creative-games.luban)](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/blob/main/LICENSE)
-[![Version](https://img.shields.io/github/v/release/gameframex/com.gameframex.unity.focus-creative-games.luban)](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/releases)
-[![Documentation](https://img.shields.io/badge/Documentation-문서-blue)](https://gameframex.doc.alianblank.com)
+[![License](https://img.shields.io/github/license/GameFrameX/com.gameframex.unity.focus-creative-games.luban)](https://github.com/GameFrameX/com.gameframex.unity.focus-creative-games.luban/blob/main/LICENSE.md)
+[![Version](https://img.shields.io/github/v/release/GameFrameX/com.gameframex.unity.focus-creative-games.luban)](https://github.com/GameFrameX/com.gameframex.unity.focus-creative-games.luban/releases)
+[![Documentation](https://img.shields.io/badge/Documentation-docs-blue)](https://gameframex.doc.alianblank.com)
 
 인디 게임 개발자를 위한 올인원 솔루션 · 인디 개발자의 꿈을 실현
 
-[문서](https://gameframex.doc.alianblank.com) · [빠른 시작](#빠른-시작) · [QQ 그룹](https://qm.qq.com/q/5kbDVBdUeS) · **언어**
+<br />
+
+[문서](https://gameframex.doc.alianblank.com) · [빠른 시작](#빠른-시작) · [QQ 그룹](https://qm.qq.com/q/5kbDVBdUeS)
+
+<br />
 
 [English](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | **한국어**
 
 </div>
-
----
-
 ## 프로젝트 개요
 
 매우 강력한 설정 솔루션. Luban은 강력하고 사용하기 쉬우며 우아하고 안정적인 게임 설정 솔루션입니다. 소규모에서 초대형 게임 프로젝트까지 간단한 것부터 복잡한 게임 설정 워크플로우 요구를 충족하도록 설계되었습니다.

@@ -1,23 +1,24 @@
 <div align="center">
 
-<img src="https://download.alianblank.com/gameframex/gameframex_logo_320.png" alt="GameFrameX Logo" width="160"/>
+<img src="https://download.alianblank.com/gameframex/gameframex_logo_320.png" alt="Game Frame X Logo" width="160" />
 
 # Game Frame X Luban Config Component
 
-[![License](https://img.shields.io/github/license/gameframex/com.gameframex.unity.focus-creative-games.luban)](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/blob/main/LICENSE)
-[![Version](https://img.shields.io/github/v/release/gameframex/com.gameframex.unity.focus-creative-games.luban)](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/releases)
-[![Documentation](https://img.shields.io/badge/Documentation-Documentation-blue)](https://gameframex.doc.alianblank.com)
+[![License](https://img.shields.io/github/license/GameFrameX/com.gameframex.unity.focus-creative-games.luban)](https://github.com/GameFrameX/com.gameframex.unity.focus-creative-games.luban/blob/main/LICENSE.md)
+[![Version](https://img.shields.io/github/v/release/GameFrameX/com.gameframex.unity.focus-creative-games.luban)](https://github.com/GameFrameX/com.gameframex.unity.focus-creative-games.luban/releases)
+[![Documentation](https://img.shields.io/badge/Documentation-docs-blue)](https://gameframex.doc.alianblank.com)
 
 All-in-One Solution for Indie Game Development · Empowering Indie Developers' Dreams
 
-[Documentation](https://gameframex.doc.alianblank.com) · [Quick Start](#quick-start) · [QQ Group](https://qm.qq.com/q/5kbDVBdUeS) · **Language**
+<br />
+
+[Documentation](https://gameframex.doc.alianblank.com) · [Quick Start](#quick-start) · [QQ Group](https://qm.qq.com/q/5kbDVBdUeS)
+
+<br />
 
 **English** | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
 </div>
-
----
-
 ## Project Overview
 
 A powerful game configuration solution. Luban is a powerful, easy-to-use, elegant, and stable game configuration solution designed to meet the workflow needs of game configuration from small to very large game projects.
