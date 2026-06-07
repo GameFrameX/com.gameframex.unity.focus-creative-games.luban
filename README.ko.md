@@ -12,7 +12,7 @@
 
 <br />
 
-[문서](https://gameframex.doc.alianblank.com) · [빠른 시작](#빠른-시작) · [QQ 그룹](https://qm.qq.com/q/5kbDVBdUeS)
+[문서](https://gameframex.doc.alianblank.com) · [빠른 시작](#빠른-시작) · QQ 그룹: 467608841 / 233840761
 
 <br />
 
@@ -55,7 +55,7 @@ Luban은 게임 설정 개발 워크플로우를 표준화하여 기획자와 �
 
 ## 커뮤니티 및 지원
 
-- [QQ 그룹](https://qm.qq.com/q/5kbDVBdUeS)
+- QQ 그룹: 467608841 / 233840761
 
 ## 변경 로그
 

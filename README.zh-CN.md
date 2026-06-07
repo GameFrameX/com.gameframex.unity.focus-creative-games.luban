@@ -12,7 +12,7 @@
 
 <br />
 
-[文档](https://gameframex.doc.alianblank.com) · [快速开始](#快速开始) · [QQ群](https://qm.qq.com/q/5kbDVBdUeS)
+[文档](https://gameframex.doc.alianblank.com) · [快速开始](#快速开始) · QQ群: 467608841 / 233840761
 
 <br />
 
@@ -55,7 +55,7 @@ Luban 标准化了游戏配置开发工作流，可以极大提升策划和程�
 
 ## 社区与支持
 
-- [QQ群](https://qm.qq.com/q/5kbDVBdUeS)
+- QQ群: 467608841 / 233840761
 
 ## 更新日志
 
