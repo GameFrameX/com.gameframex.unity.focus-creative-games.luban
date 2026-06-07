@@ -1,3 +1,10 @@
+## [2.1.3](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/compare/2.1.2...2.1.3) (2026-06-07)
+
+
+### Bug Fixes
+
+* 统一 LICENSE.md 为 Apache 2.0 (自有仓库) ([52d489f](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/commit/52d489f54cc9a27a424a94f06bd9c28bef14ecbd))
+
 ## [2.1.2](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/compare/2.1.1...2.1.2) (2026-06-01)
 
 
