@@ -1,3 +1,10 @@
+## [2.1.4](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/compare/2.1.3...2.1.4) (2026-08-29)
+
+
+### Bug Fixes
+
+* **luban:** 修复 ByteBuf.ReadFlong 低 32 位符号扩展导致 long 值读错 ([#1](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/issues/1)) ([1b05bcc](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/commit/1b05bcce62914f0b2cddf20b6f514d01decb41f3))
+
 ## [2.1.3](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/compare/2.1.2...2.1.3) (2026-06-07)
 
 
