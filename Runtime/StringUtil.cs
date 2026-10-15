@@ -1,17 +1,18 @@
 using System.Collections.Generic;
 using System.Text;
-using UnityEngine.Scripting;
 
 namespace LuBan.Runtime
 {
-    [Preserve]
+    [UnityEngine.Scripting.Preserve]
     public static class StringUtil
     {
+        [UnityEngine.Scripting.Preserve]
         public static string ToStr(object o)
         {
             return ToStr(o, new StringBuilder());
         }
 
+        [UnityEngine.Scripting.Preserve]
         public static string ToStr(object o, StringBuilder sb)
         {
             foreach (var p in o.GetType().GetFields())
@@ -27,16 +28,19 @@ namespace LuBan.Runtime
             return sb.ToString();
         }
 
+        [UnityEngine.Scripting.Preserve]
         public static string ArrayToString<T>(T[] arr)
         {
             return "[" + string.Join(",", arr) + "]";
         }
 
+        [UnityEngine.Scripting.Preserve]
         public static string CollectionToString<T>(IEnumerable<T> arr)
         {
             return "[" + string.Join(",", arr) + "]";
         }
 
+        [UnityEngine.Scripting.Preserve]
         public static string CollectionToString<TK, TV>(IDictionary<TK, TV> dic)
         {
             var sb = new StringBuilder('{');

@@ -2,11 +2,10 @@ using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
-using UnityEngine.Scripting;
 
 namespace LuBan.Runtime
 {
-    [Preserve]
+    [UnityEngine.Scripting.Preserve]
     public enum EDeserializeError
     {
         OK,
@@ -15,45 +14,53 @@ namespace LuBan.Runtime
         // UNMARSHAL_ERR,
     }
 
-    [Preserve]
+    [UnityEngine.Scripting.Preserve]
     public class SerializationException : Exception
     {
+        [UnityEngine.Scripting.Preserve]
         public SerializationException()
         {
         }
 
+        [UnityEngine.Scripting.Preserve]
         public SerializationException(string msg) : base(msg)
         {
         }
 
+        [UnityEngine.Scripting.Preserve]
         public SerializationException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }
 
-    [Preserve]
+    [UnityEngine.Scripting.Preserve]
     public readonly struct SegmentSaveState
     {
+        [UnityEngine.Scripting.Preserve]
         public SegmentSaveState(int readerIndex, int writerIndex)
         {
             ReaderIndex = readerIndex;
             WriterIndex = writerIndex;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public int ReaderIndex { get; }
 
+        [UnityEngine.Scripting.Preserve]
         public int WriterIndex { get; }
     }
 
-    [Preserve]
+    [UnityEngine.Scripting.Preserve]
     public sealed class ByteBuf : ICloneable, IEquatable<ByteBuf>
     {
+        [UnityEngine.Scripting.Preserve]
         public ByteBuf()
         {
             Bytes = Array.Empty<byte>();
             ReaderIndex = WriterIndex = 0;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public ByteBuf(int capacity)
         {
             Bytes = capacity > 0 ? new byte[capacity] : Array.Empty<byte>();
@@ -61,6 +68,7 @@ namespace LuBan.Runtime
             WriterIndex = 0;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public ByteBuf(byte[] bytes)
         {
             Bytes = bytes;
@@ -68,6 +76,7 @@ namespace LuBan.Runtime
             WriterIndex = Capacity;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public ByteBuf(byte[] bytes, int readIndex, int writeIndex)
         {
             Bytes = bytes;
@@ -75,16 +84,19 @@ namespace LuBan.Runtime
             WriterIndex = writeIndex;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public ByteBuf(int capacity, Action<ByteBuf> releaser) : this(capacity)
         {
             _releaser = releaser;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public static ByteBuf Wrap(byte[] bytes)
         {
             return new ByteBuf(bytes, 0, bytes.Length);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void Replace(byte[] bytes)
         {
             Bytes = bytes;
@@ -92,6 +104,7 @@ namespace LuBan.Runtime
             WriterIndex = Capacity;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void Replace(byte[] bytes, int beginPos, int endPos)
         {
             Bytes = bytes;
@@ -99,38 +112,48 @@ namespace LuBan.Runtime
             WriterIndex = endPos;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public int ReaderIndex { get; set; }
 
+        [UnityEngine.Scripting.Preserve]
         public int WriterIndex { get; set; }
 
         private readonly Action<ByteBuf> _releaser;
 
+        [UnityEngine.Scripting.Preserve]
         public int Capacity => Bytes.Length;
 
+        [UnityEngine.Scripting.Preserve]
         public int Size
         {
             get { return WriterIndex - ReaderIndex; }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public bool Empty => WriterIndex <= ReaderIndex;
 
+        [UnityEngine.Scripting.Preserve]
         public bool NotEmpty => WriterIndex > ReaderIndex;
 
 
+        [UnityEngine.Scripting.Preserve]
         public void AddWriteIndex(int add)
         {
             WriterIndex += add;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void AddReadIndex(int add)
         {
             ReaderIndex += add;
         }
 
 #pragma warning disable CA1819 // 属性不应返回数组
+        [UnityEngine.Scripting.Preserve]
         public byte[] Bytes { get; private set; }
 #pragma warning restore CA1819 // 属性不应返回数组
 
+        [UnityEngine.Scripting.Preserve]
         public byte[] CopyData()
         {
             var n = Remaining;
@@ -146,11 +169,13 @@ namespace LuBan.Runtime
             }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public int Remaining
         {
             get { return WriterIndex - ReaderIndex; }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void DiscardReadBytes()
         {
             WriterIndex -= ReaderIndex;
@@ -158,16 +183,19 @@ namespace LuBan.Runtime
             ReaderIndex = 0;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public int NotCompactWritable
         {
             get { return Capacity - WriterIndex; }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteBytesWithoutSize(byte[] bs)
         {
             WriteBytesWithoutSize(bs, 0, bs.Length);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteBytesWithoutSize(byte[] bs, int offset, int len)
         {
             EnsureWrite(len);
@@ -175,6 +203,7 @@ namespace LuBan.Runtime
             WriterIndex += len;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void Clear()
         {
             ReaderIndex = WriterIndex = 0;
@@ -213,6 +242,7 @@ namespace LuBan.Runtime
             }
         }
 
+        [UnityEngine.Scripting.Preserve]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void EnsureWrite(int size)
         {
@@ -237,30 +267,35 @@ namespace LuBan.Runtime
             return (ReaderIndex + size <= WriterIndex);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void Append(byte x)
         {
             EnsureWrite(1);
             Bytes[WriterIndex++] = x;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteBool(bool b)
         {
             EnsureWrite(1);
             Bytes[WriterIndex++] = (byte)(b ? 1 : 0);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public bool ReadBool()
         {
             EnsureRead(1);
             return Bytes[ReaderIndex++] != 0;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteByte(byte x)
         {
             EnsureWrite(1);
             Bytes[WriterIndex++] = x;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public byte ReadByte()
         {
             EnsureRead(1);
@@ -268,6 +303,7 @@ namespace LuBan.Runtime
         }
 
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteShort(short x)
         {
             if (x >= 0)
@@ -295,6 +331,7 @@ namespace LuBan.Runtime
             WriterIndex += 3;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public short ReadShort()
         {
             EnsureRead(1);
@@ -324,6 +361,7 @@ namespace LuBan.Runtime
             }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public short ReadFshort()
         {
             EnsureRead(2);
@@ -344,6 +382,7 @@ namespace LuBan.Runtime
             return x;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteFshort(short x)
         {
             EnsureWrite(2);
@@ -362,12 +401,14 @@ namespace LuBan.Runtime
             WriterIndex += 2;
         }
 
+        [UnityEngine.Scripting.Preserve]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void WriteInt(int x)
         {
             WriteUint((uint)x);
         }
 
+        [UnityEngine.Scripting.Preserve]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int ReadInt()
         {
@@ -375,6 +416,7 @@ namespace LuBan.Runtime
         }
 
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteUint(uint x)
         {
             // 如果有修改，记得也把 EndWriteSegment改了
@@ -420,6 +462,7 @@ namespace LuBan.Runtime
             }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public uint ReadUint()
         {
             ///
@@ -461,6 +504,7 @@ namespace LuBan.Runtime
             }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public unsafe void WriteUint_Unsafe(uint x)
         {
             // 0 111 1111
@@ -513,6 +557,7 @@ namespace LuBan.Runtime
             }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public unsafe uint ReadUint_Unsafe()
         {
             ///
@@ -562,6 +607,7 @@ namespace LuBan.Runtime
             }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public int ReadFint()
         {
             EnsureRead(4);
@@ -583,6 +629,7 @@ namespace LuBan.Runtime
         }
 
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteFint(int x)
         {
             EnsureWrite(4);
@@ -603,6 +650,7 @@ namespace LuBan.Runtime
             WriterIndex += 4;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public int ReadFint_Safe()
         {
             EnsureRead(4);
@@ -615,6 +663,7 @@ namespace LuBan.Runtime
         }
 
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteFint_Safe(int x)
         {
             EnsureWrite(4);
@@ -625,21 +674,25 @@ namespace LuBan.Runtime
             WriterIndex += 4;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteLong(long x)
         {
             WriteUlong((ulong)x);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public long ReadLong()
         {
             return (long)ReadUlong();
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteNumberAsLong(double x)
         {
             WriteLong((long)x);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public double ReadLongAsNumber()
         {
             return ReadLong();
@@ -739,6 +792,7 @@ namespace LuBan.Runtime
             }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public ulong ReadUlong()
         {
             EnsureRead(1);
@@ -812,6 +866,7 @@ namespace LuBan.Runtime
         }
 
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteFlong(long x)
         {
             EnsureWrite(8);
@@ -837,6 +892,7 @@ namespace LuBan.Runtime
             WriterIndex += 8;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public long ReadFlong()
         {
             EnsureRead(8);
@@ -880,6 +936,7 @@ namespace LuBan.Runtime
 
 
         //const bool isLittleEndian = true;
+        [UnityEngine.Scripting.Preserve]
         public void WriteFloat(float x)
         {
             EnsureWrite(4);
@@ -909,6 +966,7 @@ namespace LuBan.Runtime
             WriterIndex += 4;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public float ReadFloat()
         {
             EnsureRead(4);
@@ -940,6 +998,7 @@ namespace LuBan.Runtime
             return x;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteDouble(double x)
         {
             EnsureWrite(8);
@@ -969,6 +1028,7 @@ namespace LuBan.Runtime
             WriterIndex += 8;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public double ReadDouble()
         {
             EnsureRead(8);
@@ -1002,11 +1062,13 @@ namespace LuBan.Runtime
             return x;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteSize(int n)
         {
             WriteUint((uint)n);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public int ReadSize()
         {
             return (int)ReadUint();
@@ -1017,11 +1079,13 @@ namespace LuBan.Runtime
         // Read
         // (x >>> 1) ^ ((x << 31) >> 31)
         // (x >>> 1) ^ -(n&1)
+        [UnityEngine.Scripting.Preserve]
         public void WriteSint(int x)
         {
             WriteUint(((uint)x << 1) ^ ((uint)x >> 31));
         }
 
+        [UnityEngine.Scripting.Preserve]
         public int ReadSint()
         {
             uint x = ReadUint();
@@ -1034,17 +1098,20 @@ namespace LuBan.Runtime
         // Read
         // (x >>> 1) ^((x << 63) >> 63)
         // (x >>> 1) ^ -(n&1L)
+        [UnityEngine.Scripting.Preserve]
         public void WriteSlong(long x)
         {
             WriteUlong(((ulong)x << 1) ^ ((ulong)x >> 63));
         }
 
+        [UnityEngine.Scripting.Preserve]
         public long ReadSlong()
         {
             long x = ReadLong();
             return ((long)((ulong)x >> 1) ^ ((x & 1) << 63));
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteString(string x)
         {
             var n = x != null ? Encoding.UTF8.GetByteCount(x) : 0;
@@ -1058,8 +1125,10 @@ namespace LuBan.Runtime
         }
 
         // byte[], [start, end)
+        [UnityEngine.Scripting.Preserve]
         public static Func<byte[], int, int, string> StringCacheFinder { get; set; }
 
+        [UnityEngine.Scripting.Preserve]
         public string ReadString()
         {
             var n = ReadSize();
@@ -1087,6 +1156,7 @@ namespace LuBan.Runtime
             }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteBytes(byte[] x)
         {
             var n = x != null ? x.Length : 0;
@@ -1099,6 +1169,7 @@ namespace LuBan.Runtime
             }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public byte[] ReadBytes()
         {
             var n = ReadSize();
@@ -1118,12 +1189,14 @@ namespace LuBan.Runtime
 
         // 以下是一些特殊类型
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteComplex(Complex x)
         {
             WriteDouble(x.Real);
             WriteDouble(x.Imaginary);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public Complex ReadComplex()
         {
             var x = ReadDouble();
@@ -1131,12 +1204,14 @@ namespace LuBan.Runtime
             return new Complex(x, y);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteVector2(Vector2 x)
         {
             WriteFloat(x.X);
             WriteFloat(x.Y);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public Vector2 ReadVector2()
         {
             float x = ReadFloat();
@@ -1144,6 +1219,7 @@ namespace LuBan.Runtime
             return new Vector2(x, y);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteVector3(Vector3 x)
         {
             WriteFloat(x.X);
@@ -1151,6 +1227,7 @@ namespace LuBan.Runtime
             WriteFloat(x.Z);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public Vector3 ReadVector3()
         {
             float x = ReadFloat();
@@ -1159,6 +1236,7 @@ namespace LuBan.Runtime
             return new Vector3(x, y, z);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteVector4(Vector4 x)
         {
             WriteFloat(x.X);
@@ -1167,6 +1245,7 @@ namespace LuBan.Runtime
             WriteFloat(x.W);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public Vector4 ReadVector4()
         {
             float x = ReadFloat();
@@ -1177,6 +1256,7 @@ namespace LuBan.Runtime
         }
 
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteQuaternion(Quaternion x)
         {
             WriteFloat(x.X);
@@ -1185,6 +1265,7 @@ namespace LuBan.Runtime
             WriteFloat(x.W);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public Quaternion ReadQuaternion()
         {
             float x = ReadFloat();
@@ -1195,6 +1276,7 @@ namespace LuBan.Runtime
         }
 
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteMatrix4x4(Matrix4x4 x)
         {
             WriteFloat(x.M11);
@@ -1215,6 +1297,7 @@ namespace LuBan.Runtime
             WriteFloat(x.M44);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public Matrix4x4 ReadMatrix4x4()
         {
             float m11 = ReadFloat();
@@ -1247,6 +1330,7 @@ namespace LuBan.Runtime
         }
 
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteByteBufWithSize(ByteBuf o)
         {
             int n = o.Size;
@@ -1261,6 +1345,7 @@ namespace LuBan.Runtime
             }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteByteBufWithoutSize(ByteBuf o)
         {
             int n = o.Size;
@@ -1270,6 +1355,7 @@ namespace LuBan.Runtime
             }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public bool TryReadByte(out byte x)
         {
             if (CanRead(1))
@@ -1284,6 +1370,7 @@ namespace LuBan.Runtime
             }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public EDeserializeError TryDeserializeInplaceByteBuf(int maxSize, ByteBuf inplaceTempBody)
         {
             //if (!CanRead(1)) { return EDeserializeError.NOT_ENOUGH; }
@@ -1360,12 +1447,14 @@ namespace LuBan.Runtime
             return EDeserializeError.OK;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteRawTag(byte b1)
         {
             EnsureWrite(1);
             Bytes[WriterIndex++] = b1;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteRawTag(byte b1, byte b2)
         {
             EnsureWrite(2);
@@ -1374,6 +1463,7 @@ namespace LuBan.Runtime
             WriterIndex += 2;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteRawTag(byte b1, byte b2, byte b3)
         {
             EnsureWrite(3);
@@ -1385,6 +1475,7 @@ namespace LuBan.Runtime
 
         #region segment
 
+        [UnityEngine.Scripting.Preserve]
         public void BeginWriteSegment(out int oldSize)
         {
             oldSize = Size;
@@ -1392,6 +1483,7 @@ namespace LuBan.Runtime
             WriterIndex += 1;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void EndWriteSegment(int oldSize)
         {
             int startPos = ReaderIndex + oldSize;
@@ -1444,6 +1536,7 @@ namespace LuBan.Runtime
             }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void ReadSegment(out int startIndex, out int segmentSize)
         {
             EnsureRead(1);
@@ -1494,6 +1587,7 @@ namespace LuBan.Runtime
             }
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void ReadSegment(ByteBuf buf)
         {
             ReadSegment(out int startPos, out var size);
@@ -1502,6 +1596,7 @@ namespace LuBan.Runtime
             buf.WriterIndex = startPos + size;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void EnterSegment(out SegmentSaveState saveState)
         {
             ReadSegment(out int startPos, out int size);
@@ -1511,6 +1606,7 @@ namespace LuBan.Runtime
             WriterIndex = startPos + size;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void LeaveSegment(SegmentSaveState saveState)
         {
             ReaderIndex = saveState.ReaderIndex;
@@ -1535,6 +1631,7 @@ namespace LuBan.Runtime
             return (obj is ByteBuf other) && Equals(other);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public bool Equals(ByteBuf other)
         {
             if (other == null)
@@ -1558,12 +1655,14 @@ namespace LuBan.Runtime
             return true;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public object Clone()
         {
             return new ByteBuf(CopyData());
         }
 
 
+        [UnityEngine.Scripting.Preserve]
         public static ByteBuf FromString(string value)
         {
             var ss = value.Split(',');
@@ -1587,6 +1686,7 @@ namespace LuBan.Runtime
             return hash;
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void Release()
         {
             _releaser?.Invoke(this);
@@ -1594,11 +1694,13 @@ namespace LuBan.Runtime
 
 #if SUPPORT_PUERTS_ARRAYBUF
         // -- add for puerts
+        [UnityEngine.Scripting.Preserve]
         public Puerts.ArrayBuffer ReadArrayBuffer()
         {
             return new Puerts.ArrayBuffer(ReadBytes());
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void WriteArrayBuffer(Puerts.ArrayBuffer bytes)
         {
             WriteBytes(bytes.Bytes);

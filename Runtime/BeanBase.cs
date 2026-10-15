@@ -1,8 +1,7 @@
-using UnityEngine.Scripting;
 
 namespace LuBan.Runtime
 {
-    [Preserve]
+    [UnityEngine.Scripting.Preserve]
     public abstract class BeanBase : ITypeId
     {
         public abstract int GetTypeId();
