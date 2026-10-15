@@ -1,3 +1,11 @@
+## [2.1.5](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/compare/2.1.4...2.1.5) (2026-10-15)
+
+
+### Bug Fixes
+
+* **package:** 修正品牌命名为 Game Frame X ([07c0ac7](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/commit/07c0ac7161402611f9ce1c556b03678e8040789c))
+* **runtime:** 补全 Preserve 防裁剪标注 ([add2f52](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/commit/add2f5248a842295ca5fd30bfc6a8e91d254c6eb))
+
 ## [2.1.4](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/compare/2.1.3...2.1.4) (2026-08-29)
 
 
