@@ -1,12 +1,12 @@
 {
   "name": "com.gameframex.unity.focus-creative-games.luban",
   "displayName": "Game Frame X LuBan",
-  "category": "Game Framework X",
+  "category": "Game Frame X",
   "description": "独立游戏前后端一体化解决方案 https://gameframex.doc.alianblank.com/",
   "version": "2.1.4",
   "unity": "2019.4",
   "keywords": [
-    "Game Framework X"
+    "Game Frame X"
   ],
   "documentationUrl": "https://gameframex.doc.alianblank.com",
   "changelogUrl": "https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/blob/main/CHANGELOG.md",
