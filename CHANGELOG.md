@@ -1,3 +1,10 @@
+## [2.1.6](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/compare/2.1.5...2.1.6) (2026-11-10)
+
+
+### Bug Fixes
+
+* **focus-creative-games.luban:** 添加完整 link.xml 防代码裁剪保护 ([f18df0f](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/commit/f18df0fa1ba415052dc435bb02f9fe0141203309))
+
 ## [2.1.5](https://github.com/gameframex/com.gameframex.unity.focus-creative-games.luban/compare/2.1.4...2.1.5) (2026-10-15)
 
 
